@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE vars SYSTEM "https://resources.jetbrains.com/writerside/1.0/vars.dtd">
+<vars>
+    <var name="product" value="JIPipe"/>
+    <var name="mouse" value="🖱"/>
+    <var name="c1" value="➊"/>
+    <var name="c2" value="➋"/>
+    <var name="c3" value="➌"/>
+    <var name="c4" value="❹"/>
+    <var name="c5" value="❺"/>
+    <var name="key_left" value="←"/>
+    <var name="key_up" value="↑"/>
+    <var name="key_right" value="→"/>
+    <var name="key_down" value="↓"/>
+    <var name="key_enter" value="Enter"/>
+    <var name="recommended" value="⭐"/>
+    <var name="default" value="⭐"/>
+    <var name="star" value="⭐"/>
+    <var name="hint" value="👉"/>
+    <var name="warn" value="⚠"/>
+</vars>
