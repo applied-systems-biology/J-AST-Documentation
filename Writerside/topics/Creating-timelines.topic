@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Creating timelines" id="Creating-timelines">
+
+    <note>This step is not applicable if your project type is set to <ui-path>Single images</ui-path></note>
+    <p>If your project comprises image timelines, you will need to guide J-AST through associating which image belongs to which timeline, as well as
+    ensuring the correct order. We highly recommend to first <a href="Adding-image-metadata.topic">add image metadata</a> prior to the creation timelines.</p>
+    <chapter title="Unsorted images">
+        If an image is not yet associated to a timeline, it is stored within a dedicated <ui-path>Unsorted images</ui-path> list.
+        <img src="jast-unsorted-images.png" alt="Unsorted images"/>
+        If no unsorted images are available, the interface will automatically disappear.
+    </chapter>
+    <chapter title="Automatic timeline sorting">
+        If you provided the required metadata (experiment, sample, assay type, time point), then you can use the automated timeline sorting algorithm.
+        To run this operation, select the unsorted images by clicking <ui-path>SELECT ALL UNSORTED</ui-path>, followed by navigating to <ui-path>PROCESS | Auto-sort by metadata</ui-path>.
+        <img src="jast-autosort-1.png" alt="Launching autosort"/>
+        You will be asked to define the time point order, which can be done by clicking the input field and adding the detected time points in the correct order.
+        <img src="jast-autosort-2.png" alt="Autosort order"/>
+        After clicking <ui-path>OK</ui-path>, images will be automatically organized into timelines.
+        <warning>This algorithm will fail if your image metadata is not fully unique. In such cases, J-AST will refuse to sort some images.</warning>
+        <img src="jast-autosort-result.png" alt="Autosort result" thumbnail="true"/>
+    </chapter>
+    <chapter title="Manual sorting">
+        At any point you manually sort images by moving them between timelines or from/to the unsorted images drawer.
+        Just drag the image around to achieve this.
+        <video src="jast-timeline-sorting.mp4" preview-src="jast-timeline-sorting.png"/>
+    </chapter>
+</topic>

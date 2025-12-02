@@ -15,5 +15,6 @@
         <toc-element topic="Creating-projects.topic"/>
         <toc-element topic="Uploading-files.topic"/>
         <toc-element topic="Adding-image-metadata.topic"/>
+        <toc-element topic="Creating-timelines.topic"/>
     </toc-element>
 </instance-profile>
