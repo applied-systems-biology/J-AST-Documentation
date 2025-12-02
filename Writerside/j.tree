@@ -16,5 +16,14 @@
         <toc-element topic="Uploading-files.topic"/>
         <toc-element topic="Adding-image-metadata.topic"/>
         <toc-element topic="Creating-timelines.topic"/>
+        <toc-element topic="Image-preprocessing.topic"/>
+        <toc-element topic="Finding-the-plate.topic"/>
+        <toc-element topic="Finding-the-DDA-disk.topic"/>
+        <toc-element topic="Finding-the-E-Test-strip.topic"/>
+        <toc-element topic="Finding-the-E-Test-ZOI-shape.topic"/>
+        <toc-element topic="Manual-annotations.topic"/>
+    </toc-element>
+    <toc-element topic="Guides.topic">
+        <toc-element topic="Multiple-plates-disks-strips.topic"/>
     </toc-element>
 </instance-profile>

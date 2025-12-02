@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Finding the plate" id="Finding-the-plate">
+
+    <p>One of the first steps in the analysis of AST image is the definition of the plate area. J-AST provides both
+    automated and manual methods to achieve this task.</p>
+    <tip>Plate detection can be run without sorting images into a timeline.</tip>
+    <chapter title="Automated plate detection">
+        <note>Please ensure that your images follow the <a href="Image-preprocessing.topic">general expectations</a> of our algorithms and apply preprocessing if necessary.</note>
+        The automated plate detection can be started by selecting the image(s) and navigating to <ui-path>PROCESS | Plate | Auto-detect plate</ui-path>.
+        The algorithm allows you to setup the following parameters:
+        <deflist>
+            <def title="Use fast algorithm">Runs a faster alternative algorithm that works well if the contrast between plate and background is very high.
+            <tip>This algorithm will sometimes work better on some images compared to the standard algorithm, so feel free to try this option out if the detection is not satisfactory.</tip></def>
+            <def title="Calibrate afterwards">
+                After plate detection, calibrate the pixel size based on the known plate diameter.
+            </def>
+            <def title="Calibration: Plate diameter (mm)">
+                Only used if <ui-path>Calibrate afterwards</ui-path> is active. The physical diameter of the plate in millimeters.
+            </def>
+        </deflist>
+        <img src="jast-plate-autodetect.png" alt="Plate autodetect setup"/>
+        You will be presented with a preview of all images that will be processed. Click <ui-path>OK</ui-path> to start the plate detection.
+    </chapter>
+    <chapter title="Manual plate detection">
+        If the algorithms do not produce the expected results or if you prefer to do a manual annotation, you can use our interactive tool.
+        To open it, select the image and click the <control>Edit</control> button for the plate annotation on the right-hand side.
+        <img src="jast-plate-edit.png" alt="Edit plate annotation"/>
+        To lean more about the interactive editor, follow <a href="Manual-annotations.topic">our guide</a>.
+    </chapter>
+</topic>

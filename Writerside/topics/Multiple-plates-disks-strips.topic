@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Multiple plates/disks/strips" id="Multiple-plates-disks-strips">
+
+    J-AST is designed to handle only one plate per image, as well as only one DDA disk/E-Test strip per plate.
+    Yet, you can still adapt J-AST to handle your images by uploading images multiple times and controlling the
+    plate region.
+
+    <chapter title="Preparation">
+        <procedure>
+            <step>Upload your image multiple times (per plate, per disk/strip)</step>
+            <step>Apply all necessary <a href="Adding-image-metadata.topic">metadata steps</a> as with any other image</step>
+        </procedure>
+    </chapter>
+    <chapter title="Multiple plates">
+        <note>Consider cutting up multi-plate images using a standard image editor prior to uploading them to J-AST.</note>
+        If multiple plates are present, you will have to rely on <a href="Manual-annotations.topic">annotating the plate region manually</a>
+        using the interactive editor included within J-AST. After configuring the plate area, run the manual pixel size calibration through
+        <ui-path>PROCESS | Plate | Calibrate pixel size by plate</ui-path>, which will the correct pixel size information for the image(s).
+    </chapter>
+    <chapter title="Multiple disks/strips">
+        Either find the plate automatically and run the associated pixel size calibration (automatically done by default in case of automated detection) or
+        annotate the <emphasis>full</emphasis> plate manually (see above), ensuring that the pixel size calibration results are correct.
+        <p>Follow this by using the <a href="Manual-annotations.topic">interactive editor</a> to remove regions that are not associated to
+        the intended strip/disk.</p>
+        All following analysis steps will be constrained to your annotated plate area.
+    </chapter>
+</topic>

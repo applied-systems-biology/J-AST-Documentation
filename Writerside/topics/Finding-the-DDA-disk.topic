@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Finding the DDA disk" id="Finding-the-DDA-disk">
+
+    <p>For our analysis algorithms to work DDAs need to be annotated with the disk region. J-AST provides automated and interactive methods to achieve this task.</p>
+    <chapter title="Automated disk detection">
+        <note>Please ensure that your images follow the <a href="Image-preprocessing.topic">general expectations</a> of our algorithms and apply preprocessing if necessary.</note>
+        <note>Please ensure that the <a href="Finding-the-plate.topic">plate region annotation is present</a>.</note>
+        We provide a selection DDA disk detection algorithms that each was designed to use different aspects of the image to detect the disk. To find the operations,
+        select the image(s) and navigate to <ui-path>PROCESS | DDA</ui-path>.
+        <deflist>
+            <def title="Auto-detect DDA disk (v1)">
+                Finds the most circular bright object within a given size range.
+            </def>
+            <def title="Auto-detect DDA disk (v2)">
+                Detects the disk by finding low-variance regions.
+            </def>
+            <def title="Auto-detect DDA disk (v3)">
+                Combines principles of v1 and v2.
+            </def>
+        </deflist>
+        <chapter title="Auto-detect DDA disk (v1)">
+            The algorithm can be configured using the following parameters:
+            <deflist>
+                <def title="Use fast algorithm">
+                    Assumes that the disk is located near the center of the image and applies an optimization based on that.
+                </def>
+                <def title="Minimum circularity (0-1)">
+                    The minimum circularity of the disk
+                </def>
+                <def title="Minimum diameter (mm)">
+                    The minimum disk diameter. Recommended to go below the expected range to account for thresholding artifacts.
+                </def>
+                <def title="Maximum diameter (mm)">
+                    The maximum disk diameter. Recommended to go above the expected range to account for thresholding artifacts.
+                </def>
+                <def title="Fast algorithm: Area scale (0-1)">
+                    Determines the area surrounding the image center where the disk is expected. For example 0.25 will assume a rectangular area
+                    with the size <code>0.25 * [Image Width] x 0.25 * [Image height]</code>
+                </def>
+            </deflist>
+            <img src="jast-dda-disk-v1.png" alt="jast-dda-disk-v1.png"/>
+        </chapter>
+        <chapter title="Auto-detect DDA disk (v2)">
+            The algorithm can be configured using the following parameters:
+            <deflist>
+                <def title="Expected diameter (mm)">
+                    The expected disk diameter. The algorithm will return from a set of candidates the one that has the closest diameter to the expected value.
+                </def>
+                <def title="Local variance divisor">
+                    Sets the size of the local variance filter, which is calculated as <code>[Expected size] / [Local variance divisor]</code>. Higher values make the operator more sensitive to colonies,
+                    while lower values may incorporate writing on the disk into the calculations.
+                </def>
+            </deflist>
+            <img src="jast-dda-disk-v2.png" alt="jast-dda-disk-v2.png"/>
+        </chapter>
+        <chapter title="Auto-detect DDA disk (v3)">
+            The algorithm can be configured using the following parameters:
+            <deflist>
+                <def title="Expected diameter (mm)">
+                    The expected disk diameter.
+                </def>
+                <def title="Allowed diameter difference (%)">
+                    The allowed relative difference from the expected diameter.
+                </def>
+                <def title="Minimum circularity (0-1)">
+                    The minimum circularity of the disk
+                </def>
+            </deflist>
+            <img src="jast-dda-disk-v3.png" alt="jast-dda-disk-v3.png"/>
+        </chapter>
+    </chapter>
+    <chapter title="Manual disk detection">
+        If the algorithms do not produce the expected results or if you prefer to do a manual annotation, you can use our interactive tool.
+        To open it, select the image and click the <control>Edit</control> button for the disk annotation on the right-hand side.
+        <img src="jast-disk-edit.png" alt="Edit disk annotation"/>
+        To lean more about the interactive editor, follow <a href="Manual-annotations.topic">our guide</a>.
+    </chapter>
+</topic>

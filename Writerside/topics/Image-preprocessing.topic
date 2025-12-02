@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Image preprocessing" id="Image-preprocessing">
+
+    <p>The automated processing an analysis algorithms included in J-AST assume that images follow specific rules:</p>
+    <list type="decimal">
+        <li>Dark background, bright colonies, high contrast</li>
+        <li>A single plate per image, single strip/disk per plate (<a href="Multiple-plates-disks-strips.topic">learn more about handling such images</a>) </li>
+        <li>No perspective, image captured from top</li>
+    </list>
+    <img src="DDA_Experiment_d13_24_90.0.png" alt="DDA_Experiment_d13_24_90.0.png"/>
+    <img src="ETest_Experiment_e4_24_90.0.png" alt="ETest_Experiment_e4_24_90.0.png"/>
+    RGB colored images will be automatically converted to greyscale during processing steps.
+    <chapter title="Processing inverted images">
+        If your image shows dark colonies on a bright background, you can preprocess them within J-AST by first selecting the images
+        and then navigating to <ui-path>PROCESS | Preprocessing | Invert raw image</ui-path>
+    </chapter>
+    <chapter title="Processing low-contrast images">
+        If your images are low-contrast and automated algorithms tend to be not successful, try selecting the images and running <ui-path>PROCESS | Preprocessing | Enhance contrast</ui-path>.
+    </chapter>
+</topic>
