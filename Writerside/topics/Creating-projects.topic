@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Creating projects" id="Creating-projects">
+
+    <p>J-AST supports multiple projects per account and thus greets you with an overview of all your existing projects.</p>
+    <note>If you are using a guest account, there may be limits on the number of allowed projects. Please ask the site administrator (click the <ui-path>?</ui-path> button) if
+    you want a permanent account.</note>
+    <p>To create a new project, click the <ui-path>➕ New project</ui-path> button within the project list.</p>
+    <img thumbnail="true" src="jast-create-project-1.png" alt="Create project button"/>
+    After clicking the button, a dialog will appear where you can change the properties of the newly created project.
+    <deflist>
+        <def title="Name">The name of the project</def>
+        <def title="Project type">
+            Whether the project is a timeline or consists of many independent images.
+            <note>You can at any point change the project type. This is just the default setting.</note>
+        </def>
+        <def title="Upload project ZIP file">
+            If you want to import an existing project into J-AST, provide the ZIP file using the uploader.
+            If you just want to create a new project, ignore this field.
+        </def>
+    </deflist>
+    <img thumbnail="true" src="jast-create-project-2.png" alt="Project creation window"/>
+    Click <ui-path>OK</ui-path> to create the new project.
+    <note>Sometimes it can happen that your web browser will log you out after creating a project. We are currently
+    working on this issue.</note>
+</topic>

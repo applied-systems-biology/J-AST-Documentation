@@ -11,5 +11,9 @@
         <toc-element topic="Desktop.topic"/>
         <toc-element topic="Server.topic"/>
     </toc-element>
-    <toc-element topic="User-Interface.topic"/>
+    <toc-element topic="User-Interface.topic">
+        <toc-element topic="Creating-projects.topic"/>
+        <toc-element topic="Uploading-files.topic"/>
+        <toc-element topic="Adding-image-metadata.topic"/>
+    </toc-element>
 </instance-profile>

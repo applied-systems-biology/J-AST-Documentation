@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Uploading files" id="Uploading-files">
+
+    <note>If you use the desktop app, all operations will still be local on your own computer. No data is transferred to a remote server. The upload/download terminology
+    comes from how J-AST works internally and how it manages data.</note>
+    <p>After creating the project, you can upload your image files. We currently support all standard image files supported by Java, including PNG and JPEG.
+    We recommend to use PNG due to the lossless compression.</p>
+    <p>To open the uploader, click the <ui-path>UPLOAD</ui-path> button located on the left-hand side in the toolbar. This will open a new panel where
+    you can add files to upload through clicking the <ui-path>➕</ui-path> button.</p>
+    <img src="jast-uploader.png" alt="Uploader panel"/>
+    Finally, click the <ui-path>UPLOAD NOW</ui-path> button to start uploading the data into J-AST.
+    After uploading your data, you can close the upload panel by clicking the <ui-path>UPLOAD</ui-path> button again.
+</topic>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Adding image metadata" id="Adding-image-metadata">
+
+    <p>After uploading your images, J-AST requires your help with associating the correct metadata to your images.</p>
+    <p>The supported standard metadata fields are:</p>
+    <deflist>
+        <def title="File name">The original file name. Will be automatically filled out by the uploader. Feel free to change it if needed, as J-AST internally
+        remembers the original upload file name.</def>
+        <def title="Experiment %star%">
+            The experiment that this image is associated with, for example <code>e1</code>
+        </def>
+        <def title="Sample %star%">
+            The sample this image is associated with, for example <code>s1</code>
+        </def>
+        <def title="Time point %star%">
+            The time point, for example <code>24hr</code>
+        </def>
+        <def title="Assay type %star%">
+            The assay type of this image. Should be either DDA or E-Test.
+        </def>
+        <def title="Pixel size (mm)">
+            The physical width and height of a pixel in millimeters. Defaults to <code>0.144</code> [mm].
+            <note>J-AST provides operations that will calibrate the pixel size for you based on the plate size.</note>
+        </def>
+    </deflist>
+    <p>Metadata fields marked with a %star% are essential and images should be unique according to their experiment, sample, and time point.</p>
+    <chapter title="Automated extraction">
+        J-AST provides operations that will fill essential metadata fields based on information contained within the file name.
+        <procedure>
+            <step>
+                Select the images where metadata should be filled out by clicking the <ui-path>SELECT ALL UNSORTED</ui-path> button (if available), the <ui-path>SELECT ALL</ui-path> button, or by
+            manually selecting them by holding the <control>Shift</control> key and clicking the images.
+                <note>The <ui-path>SELECT ALL UNSORTED</ui-path> button is only shown in the timeline view.</note>
+                <img thumbnail="true" src="jast-select-unsorted.png" alt="Select unsorted images"/>
+            </step>
+            <step>
+                Navigate to <ui-path>Process | Auto-fill metadata</ui-path>
+                <img src="jast-autofill-metadata-1.png" alt="Auto-fill metadata menu"/>
+            </step>
+            <step>
+                Configure how the algorithm extracts metadata (see below) and click <ui-path>OK</ui-path>.
+                <note>You can at any point change or reset the metadata or re-run the autofill operation.</note>
+            </step>
+        </procedure>
+        The <ui-path>Auto-fill metadata</ui-path> operation can be easily adapted to a variety of file naming structures.
+        <p>The operation works by first taking the file name, removing the extension, and splitting it into components according to the <ui-path>Delimiters</ui-path> field, which defaults to <code>_-</code>.
+        Then you can instruct which metadata field is filled out by which component with the option of choosing a static value.</p>
+        <p>In its default configuration, the assay type is assigned from the first component</p>
+        <img thumbnail="true" src="jast-autofill-metadata-2.png" alt="Auto-fill metadata dialog"/>
+        <chapter title="Example 1">
+            The default configuration expects <code>_-</code> as delimiters and selects assay type, experiment, sample, and time point metadata in the given order.
+            <img thumbnail="true" src="jast-autofill-metadata-default-diagram.png" alt="Auto-fill metadata example 1"/>
+        </chapter>
+        <chapter title="Example 2">
+            If your files order metadata differently or are missing metadata, you will need to configure the operation. For example if files are named as following:
+            <code-block>
+                [ASSAY TYPE]_[EXPERIMENT]_[TIME POINT].png
+            </code-block>, e.g. <code>etest_2_24hr.png</code>, the indices shift and the sample needs to be set to a static value.
+            <img thumbnail="true" src="jast-autofill-metadata-example2-config.png" alt="Auto-fill metadata example 2 configuration"/>
+            <img thumbnail="true" src="jast-autofill-metadata-example2-diagram.png" alt="Auto-fill metadata example 2"/>
+        </chapter>
+    </chapter>
+    <chapter title="Manual editing">
+        You can at any point manually edit the metadata of an image by selecting it and changing the values on the right-hand side.
+        Changes are automatically saved.
+        <img src="jast-metadata-editor.png" alt="Metadata editor"/>
+    </chapter>
+</topic>
