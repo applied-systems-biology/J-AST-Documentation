@@ -5,5 +5,74 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Manual annotations" id="Manual-annotations">
 
-    <p>Start typing here...</p>
+    <p>At any point you can apply manual corrections to annotated plates, DDA disks, E-Test strips, and E-Test ZOI
+        shapes by selecting the
+        image and clicking the
+        <ui-path>Edit</ui-path>
+        button within the annotation control.
+    </p>
+    <img src="jast-plate-edit.png" alt="Example of opening the editor"/>
+    This will open an interactive editor where you can draw and erase the mask (highlighted as red color) over the
+    image.
+    <img src="jast-interactive-editor-1.png" alt="Screenshot of the interactive editor" thumbnail="true"/>
+    <chapter title="Navigation">
+        Use your mouse to navigate around the editor:
+        <deflist>
+            <def title="Drag using left mouse button">Pan image (only if ✋ tool is enabled)</def>
+            <def title="Drag using middle mouse button">Pan image</def>
+            <def title="Mouse scroll">Zoom in and out</def>
+        </deflist>
+    </chapter>
+    <chapter title="Tools">
+        <img src="jast-interactive-editor-toolbar.png" alt="Available tools"/>
+        <chapter title="%c1% Color selection">
+            Allows you to select the color that will be drawn by either selecting the
+            <ui-path>FOREGROUND</ui-path>
+            or
+            <ui-path>BACKGROUND</ui-path>
+            option.
+        </chapter>
+        <chapter title="%c2% Pan">
+            Allows you to pan the image with the left mouse button.
+        </chapter>
+        <chapter title="%c3% Pen tool">
+            The pen tool allows you to draw/erase the mask just like in any drawing application. On selecting the tool
+            as
+            <ui-path>Brush size</ui-path>
+            control
+            will appear on the left-hand side.
+            <video src="jast-interactive-editor-pen.mp4" preview-src="jast-interactive-editor-pen.png"/>
+        </chapter>
+        <chapter title="%c4% Polygon tool">
+            The polygon tool allows you to draw/erase [filled] polygon outlines, which are useful for annotating E-Test
+            strips.
+            <video src="jast-interactive-editor-polygon.mp4" preview-src="jast-interactive-editor-polygon.png"/>
+        </chapter>
+        <chapter title="%c5% Line tool">
+            The line tool allows you to draw/erase a line with an adjustable thickness.
+            <video src="jast-interactive-editor-line.mp4" preview-src="jast-interactive-editor-line.png"/>
+        </chapter>
+        <chapter title="%c6% Mirror tool">
+            The mirror tool is useful for creating symmetric annotations. Just draw the symmetry axis and the editor
+            will mirror
+            the other parts of the image according to the axis.
+            <video src="jast-interactive-editor-mirror.mp4" preview-src="jast-interactive-editor-mirror.png"/>
+        </chapter>
+        <chapter title="%c7% Fill tool">
+            Allows you to flood-fill the foreground or background color on the selected pixel.
+            <video src="jast-interactive-editor-fill.mp4" preview-src="jast-interactive-editor-fill.png"/>
+        </chapter>
+    </chapter>
+    <chapter title="Additional functions">
+        <deflist>
+            <def title="Tools | Reset view">Resets the default zoom and pan if you lost your image</def>
+            <def title="Tools | Clear">Erases the mask</def>
+            <def title="Tools | Restore saved state">Restores the mask to the last saved state, discarding all changes</def>
+        </deflist>
+    </chapter>
+    <chapter title="Saving annotations">
+        When you are finished, click the <ui-path>SAVE ANNOTATION</ui-path> button to upload the results.
+        <img src="jast-interactive-editor-save-annotation.png" alt="Annotation save button"/>
+        <warning>Your changes will be lost if you do not click this button!</warning>
+    </chapter>
 </topic>

@@ -8,6 +8,8 @@
     <var name="c3" value="➌"/>
     <var name="c4" value="❹"/>
     <var name="c5" value="❺"/>
+    <var name="c6" value="❻"/>
+    <var name="c7" value="❼"/>
     <var name="key_left" value="←"/>
     <var name="key_up" value="↑"/>
     <var name="key_right" value="→"/>
