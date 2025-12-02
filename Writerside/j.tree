@@ -25,5 +25,6 @@
     </toc-element>
     <toc-element topic="Guides.topic">
         <toc-element topic="Multiple-plates-disks-strips.topic"/>
+        <toc-element topic="Extending-J-AST.topic"/>
     </toc-element>
 </instance-profile>

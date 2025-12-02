@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Extending J-AST (JIPipe plugins)" id="Extending-J-AST">
+
+    <p>J-AST comes with a plugin interface that facilitates the easy addition of new operations.</p>
+    <note>For servers, this needs to be done by the server administrator! Users cannot add their own pipelines.</note>
+    <p>A plugin comprises of a JIPipe 5.3.0 <code>*.jip</code> project that is being copied into the <code>share/plugins</code> directory.
+    The application/server needs to be restarted to recognize the plugin.</p>
+    <p>The JIPipe project must adhere to specific constraints, so it is an effective plugin:</p>
+    <list type="decimal">
+        <li>The project must have a project-wide directory with the key <code>tmp_dir</code>. This key is automatically set by J-AST and will point to the directory that contains all inputs and outputs </li>
+        <li>The name and description of the project must be set. The information will be used inside the J-AST frontend.</li>
+        <li>Parameter references should be avoided if possible. Instead, use project-wide parameters. JIPipe 5.3.0 projects lack easy methods to recover parameter types, thus the backend will be left with guessing the correct type.</li>
+        <li>The project must have a specific set of project-wide parameters that contain information for J-AST. The parameters are described below.</li>
+    </list>
+    <chapter title="J-AST metadata parameters">
+        Create the following project-wide parameters. J-AST will use the information contained within them to create the associated backend workload.
+        <table style="header-row">
+            <tr>
+                <td>Type</td>
+                <td>Key</td>
+                <td>Description</td>
+                <td>Allowed values</td>
+            </tr>
+            <tr>
+                <td>Boolean</td>
+                <td><code>jast_plugin</code></td>
+                <td>Must be true for J-AST to recognize the plugin</td>
+                <td>true/false</td>
+            </tr>
+            <tr>
+                <td>String</td>
+                <td><code>jast_plugin_category</code></td>
+                <td>The menu category where the operation will be placed</td>
+                <td>Can be empty</td>
+            </tr>
+            <tr>
+                <td>String</td>
+                <td><code>jast_plugin_assay_type_restriction</code></td>
+                <td>Allows to restrict the operation to a specific assay type</td>
+                <td>DDA/ETest/Unknown. Can be left empty (no restriction). Defaults to empty.</td>
+            </tr>
+            <tr>
+                <td>String</td>
+                <td><code>jast_plugin_mode</code></td>
+                <td>Determines how images are related to each other (each processed by itself, alway process whole timeline row/column)</td>
+                <td>Single/FullRow/FullColumn. Defaults to Single.</td>
+            </tr>
+            <tr>
+                <td>String</td>
+                <td><code>jast_plugin_view_mode_restriction</code></td>
+                <td>Allows to hide the operation from certain project modes</td>
+                <td>Timeline/Grid. Can be left empty (no restriction). Defaults to empty.</td>
+            </tr>
+            <tr>
+                <td>Boolean</td>
+                <td><code>jast_plugin_generates_results</code></td>
+                <td>Must be checked if results should be extracted by J-AST</td>
+                <td>true/false</td>
+            </tr>
+            <tr>
+                <td>String List</td>
+                <td><code>jast_plugin_inputs</code></td>
+                <td>List of inputs that will be available in the temporary directory</td>
+                <td>plate/strip/disk/strip-disk/zoi-shape</td>
+            </tr>
+            <tr>
+                <td>String List</td>
+                <td><code>jast_plugin_outputs</code></td>
+                <td>Lists of outputs that will be generated in the temporary directory</td>
+                <td>raw/plate/strip/disk/strip-disk/zoi-shape/pixelSize</td>
+            </tr>
+        </table>
+    </chapter>
+    <chapter title="Inputs received from J-AST">
+        You will need to prepare your pipeline to handle the folder structure that J-AST produces as pipeline inputs.
+        The pipeline receives inputs in form of files/directories located in a temporary directory, which is passed to the
+        pipeline through the <code>tmp_dir</code> directory.
+
+        <chapter title="metadata.csv">
+            This file contains all text metadata for each image. The file is structured as following:
+            <table style="header-row">
+                <tr>
+                    <td>#ImageId</td>
+                    <td>#Experiment</td>
+                    <td>#Sample</td>
+                    <td>#TimePoint</td>
+                    <td>#AssayType</td>
+                    <td>PixelSize</td>
+                    <td>GroupRow</td>
+                    <td>GroupColumn</td>
+                </tr>
+                <tr>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+            </table>
+        </chapter>
+        <chapter title="Raw images">
+            A directory <code>raw</code> is always created and contains the raw image files named according to their unique database ID (#ImageId).
+        </chapter>
+        <chapter title="Mask annotations (ROIs)">
+            Mask annotations (0 = background, 255 = foreground) are placed in directories named after the unique annotation ID and named according to the related image ID.
+            <p>The currently supported mask annotation Ids are:</p>
+            <list type="bullet">
+                <li><code>plate</code>: the plate mask</li>
+                <li><code>strip-disk</code>: the E-Test strip or DDA disk (depending on assay type)</li>
+                <li><code>zoi-shape</code>: the E-Test ZOI shape (black for DDAs)</li>
+            </list>
+        </chapter>
+    </chapter>
+    <chapter title="Expected outputs">
+        All outputs must be written relative to the <code>tmp_path</code> path and follow rules based on the output type.
+        <chapter title="Modified raw images">
+            J-AST will read modified raw images from a directory <code>raw_updated</code>. The contained images must be PNG files named after the <code>#ImageId</code>.
+        </chapter>
+        <chapter title="Mask annotations">
+            J-AST will read mask annotations from a directory named according to the mask annotation ID. The contained images must be PNG files named after the <code>#ImageId</code>.
+            The masks must have the same size as the raw images.
+        </chapter>
+        <chapter title="Results">
+            Arbitrary results must be written into a directory <code>results</code>. If <code>jast_plugin_generates_results</code> is true, J-AST will automatically explore the directory
+            and copy all files into its internal filesystem.
+        </chapter>
+    </chapter>
+</topic>
