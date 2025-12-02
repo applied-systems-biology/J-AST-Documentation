@@ -53,13 +53,25 @@
             </code-block>
             <note>The admin E-Mail is displayed within the <ui-path>help</ui-path> menu in J-AST!</note>
         </chapter>
-        <chapter title="Admin account">
+        <chapter title="JWT Security">
             Do not forget to change the JWT secret!
             <code-block>
                   SECURITY_JWT_SECRET=LONG_STRING_USED_AS_JWT_SECRET
             </code-block>
         </chapter>
-        <chapter title="JWT Security">
+        <chapter title="Provider info">
+            If you host J-AST for public use, do not forget to follow your local government's laws and add an imprint and if necessary
+            a data protection/privacy statement. You also should link to the hosting institution.
+            <code-block>
+                  PROVIDER_PROVIDER_NAME=YOUR_INSTITUTION
+                  PROVIDER_PROVIDER_URL=YOUR_INSTITUTION_ADDRESS
+                  PROVIDER_IMPRINT_FILE=LOCAL_FILE_FOR_IMPRINT
+                  PROVIDER_PRIVACY_STATEMENT_FILE=LOCAL_FILE_FOR_PRIVACY_STATEMENT
+            </code-block>
+            The backend will attempt to access the imprint and privacy statement files if requested. If the paths are empty or
+            are not found, an empty statement will be generated.
+        </chapter>
+        <chapter title="Registration and guest accounts">
             The J-AST server can be configured to allow guest accounts and limit registrations:
             <code-block>
                   ACCOUNTS_ALLOW_SELF_REGISTER=false
@@ -126,6 +138,11 @@
                 accounts:
                     admin-username: 'admin@localhost'
                     admin-password: 'Ckw55ryzy1mXGxb8'
+                provider:
+                    provider-name: 'Localhost'
+                    provider-url: 'http://localhost'
+                    imprint-file: ''
+                    privacy-statement-file: ''
                 security:
                     jwt-secret: "8TJGD0tLb0M20pxRyasR3ajktjYVfhzqVauIleiKfRJdy3SVKr95JYpC7enixXeD"
                     jwt-access-token-expiration-in-minutes: 60
