@@ -47,20 +47,26 @@
         <chapter title="Admin account">
             We highly recommend to change the username and password of the administrator account, as well as the contact E-Mail:
             <code-block>
-                  ACCOUNTS_ADMIN_USERNAME: 'USERNAME@DOMAIN'
-                  ACCOUNTS_ADMIN_PASSWORD: 'ADMIN_PASSWORD'
-                  ACCOUNTS_ADMIN_CONTACT: 'ADMIN_EMAIL_ADDRESS'
+                  ACCOUNTS_ADMIN_USERNAME=USERNAME@DOMAIN
+                  ACCOUNTS_ADMIN_PASSWORD=ADMIN_PASSWORD
+                  ACCOUNTS_ADMIN_CONTACT=ADMIN_EMAIL_ADDRESS
             </code-block>
             <note>The admin E-Mail is displayed within the <ui-path>help</ui-path> menu in J-AST!</note>
         </chapter>
-        <chapter title="Guest accounts and registration">
+        <chapter title="Admin account">
+            Do not forget to change the JWT secret!
+            <code-block>
+                  SECURITY_JWT_SECRET=LONG_STRING_USED_AS_JWT_SECRET
+            </code-block>
+        </chapter>
+        <chapter title="JWT Security">
             The J-AST server can be configured to allow guest accounts and limit registrations:
             <code-block>
-                  ACCOUNTS_ALLOW_SELF_REGISTER: false
-                  ACCOUNTS_ALLOW_GUEST_ACCOUNTS: true
-                  ACCOUNTS_GUEST_PROJECT_LIMIT: 1
-                  ACCOUNTS_GUEST_IMAGE_LIMIT: 10
-                  ACCOUNTS_GUEST_ACCOUNT_EXPIRES_MINUTES: 4320
+                  ACCOUNTS_ALLOW_SELF_REGISTER=false
+                  ACCOUNTS_ALLOW_GUEST_ACCOUNTS=true
+                  ACCOUNTS_GUEST_PROJECT_LIMIT=1
+                  ACCOUNTS_GUEST_IMAGE_LIMIT=10
+                  ACCOUNTS_GUEST_ACCOUNT_EXPIRES_MINUTES=4320
             </code-block>
             The settings above will prevent self-registration, but allow the creation of limited guest accounts with
             a limit on images and projects. After the given time, the account is deactivated and the data is deleted.
