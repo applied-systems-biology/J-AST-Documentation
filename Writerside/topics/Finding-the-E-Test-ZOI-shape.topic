@@ -5,5 +5,24 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Finding the E-Test ZOI shape" id="Finding-the-E-Test-ZOI-shape">
 
-    <p>Start typing here...</p>
+    <p>For most analysis algorithms to work E-Tests need to be annotated with the ZOI shape. J-AST provides automated and interactive methods to achieve this task.</p>
+    <chapter title="Automated E-Test ZOI shape detection">
+        <note>Please ensure that your images follow the <a href="Image-preprocessing.topic">general expectations</a> of our algorithms and apply preprocessing if necessary.</note>
+        <note>Please ensure that the <a href="Finding-the-plate.topic">plate region annotation is present</a>.</note>
+        <note>Please ensure that the <a href="Finding-the-E-Test-strip.topic">strip region annotation is present</a>.</note>
+        You can find the E-Test strip detection algorithm by first selecting the image(s) and then navigating to <ui-path>PROCESS | E-Test | Auto-detect ETest ZOI shape (v1)</ui-path>.
+        The algorithm has no parameters.
+        <chapter title="Supported assay">
+            Due to the complexity of this problem, our algorithm only works decently if the contrast between the colonies and the
+            ZOI is very high.
+            <tip>Consider manual annotation if you expect issues</tip>
+            <img thumbnail="true" src="zoi-shape-support-annotated.png" alt="Comparison of algorithm inputs"/>
+        </chapter>
+    </chapter>
+    <chapter title="Manual E-Test ZOI shape detection">
+        If the algorithms do not produce the expected results or if you prefer to do a manual annotation, you can use our interactive tool.
+        To open it, select the image and click the <control>Edit</control> button for the ZOI shape annotation on the right-hand side.
+        <img src="jast-zoi-shape-edit.png" alt="ZOI shape editor"/>
+        To lean more about the interactive editor, follow <a href="Manual-annotations.topic">our guide</a>.
+    </chapter>
 </topic>

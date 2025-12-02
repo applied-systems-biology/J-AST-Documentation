@@ -5,5 +5,32 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Finding the E-Test strip" id="Finding-the-E-Test-strip">
 
-    <p>Start typing here...</p>
+    <p>For our analysis algorithms to work E-Tests need to be annotated with the strip region. J-AST provides automated and interactive methods to achieve this task.</p>
+    <chapter title="Automated E-Test strip detection">
+        <note>Please ensure that your images follow the <a href="Image-preprocessing.topic">general expectations</a> of our algorithms and apply preprocessing if necessary.</note>
+        <note>Please ensure that the <a href="Finding-the-plate.topic">plate region annotation is present</a>.</note>
+        You can find the E-Test strip detection algorithm by first selecting the image(s) and then navigating to <ui-path>PROCESS | E-Test | Auto-detect ETest strip (v1)</ui-path>.
+        The algorithm has one parameter:
+        <deflist>
+            <def title="Strip aspect ratio">
+                The expected aspect ratio of the strip calculated as <code>[MAJOR_SIDE_LENGTH] / [MINOR_SIDE_LENGTH]</code>
+            </def>
+        </deflist>
+        <img src="jast-etest-strip-v1.png" alt="Configuration dialog"/>
+        <chapter title="Supported E-Test types">
+            Due to the variety in E-Test strip designs, this algorithm is limited to handle only one specific type of E-Tests:
+            <list>
+                <li>Mostly upright; up to 40° tilting will likely work</li>
+                <li>Bright strip with black text</li>
+                <li>Black line surrounding the strip</li>
+            </list>
+            <img src="jast-strip-detection-requirements.png" alt="E-Test strip requirements"/>
+        </chapter>
+    </chapter>
+    <chapter title="Manual E-Test strip detection">
+        If the algorithms do not produce the expected results or if you prefer to do a manual annotation, you can use our interactive tool.
+        To open it, select the image and click the <control>Edit</control> button for the strip annotation on the right-hand side.
+        <img src="jast-strip-edit.png" alt="Edit E-Test strip"/>
+        To lean more about the interactive editor, follow <a href="Manual-annotations.topic">our guide</a>.
+    </chapter>
 </topic>
