@@ -5,5 +5,130 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Server" id="Server">
 
-    <p>Start typing here...</p>
+    <p>J-AST can be easily hosted on any Linux/Windows/macOS server that supports Java. Both bare-metal and Docker-based
+    hosting are supported and have been tested by us.</p>
+    <chapter title="Bare metal">
+        You can download pre-packaged server distributions of J-AST from <a href="https://asb.hki-jena.de/j-ast/">our website</a>.
+        Start the <code>server.jar</code> file using Java. Use standard methods for configuring Spring Boot (e.g., environment variables).
+        <note>The server must be started within the server directory, because it will require the <code>share</code> and <code>bin</code> folders.</note>
+    </chapter>
+    <chapter title="Docker (Linux only)">
+        We provide a ready-to-use docker-compose setup for Linux that will build a package containing all necessary files.
+        Alternatively, you can use our server packages and adapt our <code>Dockerfile</code> and <code>docker-compose.yml</code> to your needs.
+        <p>All files can be found in the J-AST source code directory under the subfolder <code>dist/docker</code>.</p>
+        If you want to use the provided <code>prepare.sh</code> script, you will first have to copy the JIPipe version
+        associated to the J-AST version into <code>[Repository root]/bin/jipipe-linux</code>. Follow the structure provided
+        by the server packages our ideally just use the JIPipe distribution from our packages.
+    </chapter>
+    <chapter title="Deployment on subpath">
+        While Spring boot supports subpaths (e.g., https://asb.hki-jena.de<emphasis>/j-ast-app/</emphasis>) by just changing the
+        <code>SERVER_SERVLET_CONTEXT_PATH</code> environment variable to the desired subpath (in our example <code>/j-ast-app</code>),
+        the frontend toolkit does not allow for such a simple change.
+        <p>You will need to build your own server packages that come with a modified frontend. To do this, you can adapt our existing build scripts:</p>
+        <code-block lang="Bash">
+              cd dist/server-hki
+              ./build.sh 0 /j-ast-app /j-ast-app/api
+        </code-block>
+        You will need to provide the context path for the frontend and the API. When running the server, do not forget to set
+        <code>SERVER_SERVLET_CONTEXT_PATH</code> accordingly!
+    </chapter>
+    <chapter title="Configuration">
+        We highly recommend to change various default configurations. You can also find the full configuration file below.
+        <chapter title="Database">
+            J-AST was designed to work both with H2 and MariaDB databases, where H2 is intended for the use in our
+            desktop application and MariaDB should be used whenever J-AST is deployed as server.
+            <p>If you use environments to configure J-AST, set the following:</p>
+            <code-block>
+                SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb:3306/DATABASE_NAME
+                SPRING_DATASOURCE_USERNAME=DATABASE_USER
+                SPRING_DATASOURCE_PASSWORD=DATABASE_PASSWORD
+            </code-block>
+        </chapter>
+        <chapter title="Admin account">
+            We highly recommend to change the username and password of the administrator account, as well as the contact E-Mail:
+            <code-block>
+                  ACCOUNTS_ADMIN_USERNAME: 'USERNAME@DOMAIN'
+                  ACCOUNTS_ADMIN_PASSWORD: 'ADMIN_PASSWORD'
+                  ACCOUNTS_ADMIN_CONTACT: 'ADMIN_EMAIL_ADDRESS'
+            </code-block>
+            <note>The admin E-Mail is displayed within the <ui-path>help</ui-path> menu in J-AST!</note>
+        </chapter>
+        <chapter title="Guest accounts and registration">
+            The J-AST server can be configured to allow guest accounts and limit registrations:
+            <code-block>
+                  ACCOUNTS_ALLOW_SELF_REGISTER: false
+                  ACCOUNTS_ALLOW_GUEST_ACCOUNTS: true
+                  ACCOUNTS_GUEST_PROJECT_LIMIT: 1
+                  ACCOUNTS_GUEST_IMAGE_LIMIT: 10
+                  ACCOUNTS_GUEST_ACCOUNT_EXPIRES_MINUTES: 4320
+            </code-block>
+            The settings above will prevent self-registration, but allow the creation of limited guest accounts with
+            a limit on images and projects. After the given time, the account is deactivated and the data is deleted.
+            <tip>You can upgrade guest accounts to regular users using the admin panel within J-AST.</tip>
+        </chapter>
+        <chapter title="Runtime">
+            By default, J-AST allows to run two JIPipe instances in parallel. Adapt the following settings:
+            <code-block>
+                ORG_JOBRUNR_BACKGROUND_JOB_SERVER_WORKER_COUNT=NUMBER_OF_WORKERS
+            </code-block>
+            J-AST allocates 8GB of RAM per JIPipe instance. You can change this by setting the following variable:
+            <code-block>
+                RUNTIME_FIJI_ARGS_1=8G
+            </code-block>
+        </chapter>
+        <chapter title="Full configuration file">
+            The full YAML configuration file can be found below:
+            <code-block lang="yaml">
+                server:
+                port: 8081
+                spring:
+                    datasource:
+                        #    url: jdbc:h2:file:./storage/database
+                        #    username: sa
+                        #    password: password
+                        #    driverClassName: org.h2.Driver
+                        url: 'jdbc:mariadb://localhost:3306/jast-dev'
+                        username: jast-dev
+                        password: jast
+                        driver-class-name: org.mariadb.jdbc.Driver
+                    jpa:
+                        hibernate:
+                            ddl-auto: update
+                        show-sql: false
+                    servlet:
+                        multipart:
+                            enabled: true
+                            max-file-size: 10MB
+                org:
+                    jobrunr:
+                        background-job-server:
+                            enabled: true
+                            worker-count: 2
+                        dashboard:
+                            enabled: true
+                runtime:
+                    fiji-path: 'bin/jipipe-linux'
+                    fiji-executable-path: 'bin/jipipe-linux/ImageJ-linux64'
+                    fiji-args: [ '--memory', '8G' ]
+                    fiji-wrapper-enabled: true
+                    fiji-wrapper: '/usr/bin/xvfb-run'
+                    fiji-wrapper-args: [ '-a' ]
+                    custom-temp-directory: "./storage/tmp"
+                    data-directory: "./storage/data"
+                    shared-resources-directory: "./share"
+                    keep-tmp: true
+                accounts:
+                    admin-username: 'admin@localhost'
+                    admin-password: 'Ckw55ryzy1mXGxb8'
+                security:
+                    jwt-secret: "8TJGD0tLb0M20pxRyasR3ajktjYVfhzqVauIleiKfRJdy3SVKr95JYpC7enixXeD"
+                    jwt-access-token-expiration-in-minutes: 60
+                    jwt-refresh-token-expiration-in-minutes: 1440
+                #server:
+                #  servlet:
+                #    context-path: '/abc'
+                debug: off
+            </code-block>
+        </chapter>
+    </chapter>
 </topic>
